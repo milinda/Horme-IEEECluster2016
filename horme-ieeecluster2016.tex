@@ -32,6 +32,8 @@
 \usepackage{xxcolor}
 \usetikzlibrary{shapes.misc,shapes.geometric,shapes.arrows,decorations.pathmorphing,decorations.shapes}
 \usetikzlibrary{matrix,chains,scopes,positioning,arrows,fit}
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
 
 
 \usepackage{chronology}
@@ -103,7 +105,7 @@ pdfcreator = {}
 %	FRAME:
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \begin{frame}[c]{Hathitrust Research Center (HTRC)}
-Research arm of \textbf{Hathitrust Digital Library} that develops systems for enabling computational access to 13.3 million digitized volumes.
+Research arm of \textbf{Hathitrust Digital Library} that develops and maintain infrastructure for enabling computational access to 13.3 million digitized volumes.
 
 \vspace{1em}
 
@@ -112,11 +114,29 @@ Enable researchers world-wide to accomplish tera-scale text data-mining and anal
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}[c]{HTRC Platform}
+\begin{frame}[c]{HTRC Analytics Workflow}
+\smartdiagramset{back arrow disabled=true,
+additions={
+additional item offset=1em,
+additional item height=0em,
+additional item text width=15em,
+additional arrow color=teal!40,
+additional arrow line width=4pt,
+additional connections disabled=false,
+   additional arrow color=red,
+   additional arrow tip=stealth,
+   additional arrow line width=1pt
+   }}
+\smartdiagramadd[flow diagram:horizontal]{Search Solr,
+  Create Workset, Get Volumes, Analyse}{above of module2/{Workset is given as an input to analytic sub-systems that downloads volumes from storage sub-systems integrated to them},
+  below of module1/{Select a subset of data for analysis},
+  below of module3/{Random access to the corpus}}
+\end{frame}
+
+\begin{frame}[c]{HTRC Analytics Infrastructure}
+
 
 % Based on http://tex.stackexchange.com/questions/125234/upside-down-tikz-qtree-with-concentrated-edges
-\tikzstyle{var} = [draw,shape=rectangle,minimum size=1em,rounded corners=1mm]
-\tikzstyle{operator} = [draw=none,fill=none,above,pos=0]
 
 \begin{tikzpicture}
 [   grow'=up,
@@ -126,17 +146,22 @@ Enable researchers world-wide to accomplish tera-scale text data-mining and anal
     edge from parent/.style={draw,rounded corners=1mm}
 ]
 \begin{scope}[local bounding box=scope1]
-  \draw[rounded corners=5pt] (-6.7,4.6) rectangle (-3.7,4) node[pos=.5] {\tiny Prepackaged Algorithms};
-  \draw[rounded corners=5pt] (-2.85,4.6) rectangle (0.15,4) node[pos=0.5] {\tiny Data Capsules};
-  \draw[rounded corners=5pt] (1,4.6) rectangle (4,4) node[pos=0.5] {\tiny Big Data Analytics};
+  \draw[rounded corners=5pt] (-6.7,4.8) rectangle (-3.7,4.2) node[pos=.5] {\tiny Prepackaged Algorithms};
+  \draw[rounded corners=5pt] (-2.85,4.8) rectangle (0.15,4.2) node[pos=0.5] {\tiny Data Capsules};
+  \draw[rounded corners=5pt,fill=blue!40,double] (1,4.8) rectangle (4,4.2) node[pos=0.5] {\tiny Big Data Analytics};
   \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-5.7,3.6) rectangle (4,3) ;
   \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-6.2,3.3) rectangle (3.5,2.7) ;
   \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-6.7,3) rectangle (3,2.4) node[pos=.5] {\tiny Corpus Abstractions (KV, REST, \textbf{Horme})};
 \end{scope}
-
-\begin{scope}[shift={($(scope1.north)+(0.5cm,-5cm)$)}]
+\draw[<->] (-1.35,2.3) -- (-1.35,1.9) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{1}};
+\draw[<->] (-5.2,4.1) -- (-5.2,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{2}};
+\draw[<->] (-1.35,4.1) -- (-1.35,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{3}};
+\draw[<->] (2.5,4.1) -- (2.5,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\small \textbf{4}};
+\begin{scope}[shift={($(scope1.north)+(0.5cm,-5.6cm)$)}]
+  \tikzstyle{var} = [draw,shape=rectangle,minimum size=1em,rounded corners=1mm]
+  \tikzstyle{operator} = [draw=none,fill=none,above,pos=0]
   \tikzset{every node/.style={var}}
-  \Tree [.pairtree-root 
+  \Tree [.\tiny pairtree-root 
             [\edge node[operator] {};
             [
               [.\node[] {}; ] [.\node[] {}; ]
@@ -146,7 +171,14 @@ Enable researchers world-wide to accomplish tera-scale text data-mining and anal
           ]
         ]
 \end{scope}
+\draw[rounded corners=5pt,dotted,gray] (-6.8,2) rectangle (4.1,-1.2) node[draw=none,fill=none,pos=1,xshift=-1.2cm,black] {\tiny IU Data Capacitor II};
 \end{tikzpicture}
 \end{frame}
+
+\section{Motivation}
+
+\begin{frame}[c]{}
+  
+\end{frame}[c]{}
 
 \end{document}
