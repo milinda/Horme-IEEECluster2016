@@ -105,7 +105,7 @@ pdfcreator = {}
 %	FRAME:
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 \begin{frame}[c]{Hathitrust Research Center (HTRC)}
-Research arm of \textbf{Hathitrust Digital Library} that develops and maintain infrastructure for enabling computational access to \textbf{13.3 million} digitized volumes.
+Research arm of \textbf{Hathitrust Digital Library} that develops and maintain infrastructure for enabling computational access to \textbf{14 million} digitized volumes.
 
 \vspace{1em}
 
@@ -177,8 +177,29 @@ additional connections disabled=false,
 
 \section{Motivation}
 
+\begin{frame}[c]{Hadoop based Text Data Mining on HPC}
+  \begin{itemize}
+    \item Data is stored in a \emph{parallel file system (PFS)} such as Lustre connected to compute nodes via network
+    \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from PFS before the actual computation
+    \item Results get copied back to PFS after job completion
+    \item \textbf{High data staging overhead}
+    \item HDFS on HPC is limited by scratch space capacity of compute nodes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Random Access Text Data Mining on HPC}
+  \begin{itemize}
+    \item Use Solr search or some other means to narrow down the set of digitized texts to analyse
+    \item Apply text mining techniques such as topic modeling on the selected subset
+    \item Often this subset is randomly distributed across the corpus (Around 14 million volumes in HTRC)
+    \item HDFS performs poorly in random access use cases
+    \item HBase is good for random access, but needs to deploy external to HPC compute nodes due to transient nature of HPC jobs
+    \item HBase over PFS is not optimal
+  \end{itemize}
+\end{frame}
+
+\section{Horme}
 \begin{frame}[c]{}
   
-\end{frame}[c]{}
-
+\end{frame}
 \end{document}
