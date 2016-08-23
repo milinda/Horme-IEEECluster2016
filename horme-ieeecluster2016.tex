@@ -180,21 +180,21 @@ additional connections disabled=false,
 \begin{frame}[c]{Hadoop based Text Data Mining on HPC}
   \begin{itemize}
     \item Data is stored in a \emph{parallel file system (PFS)} such as Lustre connected to compute nodes via network
-    \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from PFS before the actual computation
-    \item Results get copied back to PFS after job completion
+    \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from Lustre before the actual computation
+    \item Results get copied back to Lustre after job completion
     \item \textbf{High data staging overhead}
-    \item HDFS on HPC is limited by scratch space capacity of compute nodes
+    \item HDFS on HPC and HTC environments is limited by scratch space capacity of compute nodes
   \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Random Access Text Data Mining on HPC}
+\begin{frame}[c]{Random Access Text Data Mining on HPC and HTC Environments}
   \begin{itemize}
     \item Use Solr search or some other means to narrow down the set of digitized texts to analyse
     \item Apply text mining techniques such as topic modeling on the selected subset
     \item Often this subset is randomly distributed across the corpus (Around 14 million volumes in HTRC)
     \item HDFS performs poorly in random access use cases
-    \item HBase is good for random access, but needs to deploy external to HPC compute nodes due to transient nature of HPC jobs
-    \item HBase over PFS is not optimal
+    \item HBase is good for random access, but needs to deploy external to HPC or HTC compute nodes due to transient nature of batch jobs
+    \item HBase over Lustre is not optimal
   \end{itemize}
 \end{frame}
 
