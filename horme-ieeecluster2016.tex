@@ -177,7 +177,14 @@ additional connections disabled=false,
 
 \section{Motivation}
 
-\begin{frame}[c]{Hadoop based Text Data Mining on HPC}
+\begin{frame}[c]{Hadoop on HPC and HTC Environments}
+\begin{figure}[t]
+  \includegraphics[scale=0.7]{hadoop-on-hpc-2}
+  \centering
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Hadoop on HPC and HTC Environments}
   \begin{itemize}
     \item Data is stored in a \emph{parallel file system (PFS)} such as Lustre connected to compute nodes via network
     \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from Lustre before the actual computation
@@ -187,7 +194,7 @@ additional connections disabled=false,
   \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Random Access Text Data Mining on HPC and HTC Environments}
+\begin{frame}[c]{Text Data Mining on HPC and HTC Environments}
   \begin{itemize}
     \item Use Solr search or some other means to narrow down the set of digitized texts to analyse
     \item Apply text mining techniques such as topic modeling on the selected subset
@@ -199,7 +206,22 @@ additional connections disabled=false,
 \end{frame}
 
 \section{Horme}
-\begin{frame}[c]{}
-  
+
+\begin{frame}[c]{Horme}
+\begin{itemize}
+  \item Indexed binary file format for packing key/value pairs where size of the value range from couple of kilobytes to couple of mega bytes
+  \item A Set of tools for packing and managing key/value pairs   
+  \item Storage extensions for popular Big Bidata processing frameworks to read and write Hrome binary files
+  \item Not tied to any processing framework
+  \item Works on top of any file system
+  \item Delegates replication, file striping and fault-tolerance to underline file system
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Horme}
+\begin{figure}[t]
+  \includegraphics[scale=0.6]{horme-2}
+  \centering
+\end{figure}  
 \end{frame}
 \end{document}
