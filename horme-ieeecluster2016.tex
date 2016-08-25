@@ -264,7 +264,7 @@ additional connections disabled=false,
     \item Embarrasingly parallel packing process
     \item For the sake of load balancing each chunk should carray roughly the same payload
     \begin{itemize}
-      \item Same # of records (e.g., simulation analysis task)
+      \item Same \# of records (e.g., simulation analysis task)
       \item Same chunk file size (e.g., text mining task)
     \end{itemize}
   \end{itemize}
@@ -279,10 +279,24 @@ additional connections disabled=false,
   \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Horme - Random Access With Network Storage}
+\begin{frame}[c]{Horme - Processing Chunks from Network Storage}
 \begin{figure}[t]
   \includegraphics[scale=0.4]{horme-with-pfs}
   \centering
 \end{figure}
+\end{frame}
+
+\begin{frame}[c]{Horme - Processing Chunks from Network Storage}
+\begin{itemize}
+  \item With NLineInputFormat, a single input split consists of N consecutive lines
+  \item \texttt{BloomHashIndexFile}'s \texttt{Reader} is used to read the value corresponding to each key in input split at mapper
+  \item Input should be sorted by binary chunk's path so that the \texttt{RecordReader} only needs to opens a new file when the next line is a new chunk
+  \item Workload is balanced with respect to number of records processed
+  \item Workload is approximately balances with respect to the size of the records 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{}
+  
 \end{frame}
 \end{document}
