@@ -213,7 +213,8 @@ additional connections disabled=false,
 \begin{frame}[c]{Horme}
 \begin{itemize}
   \item Indexed binary file format for packing key/value pairs where size of the value range from couple of kilobytes to couple of mega bytes
-  \item A Set of tools for packing and managing key/value pairs   
+  \item A Set of tools for packing and managing key/value pairs  
+  \item Library for reading and writing indexed binary files 
   \item Storage extensions for popular Big Bidata processing frameworks to read and write Hrome binary files
   \item Not tied to any processing framework
   \item Works on top of any file system
@@ -286,7 +287,7 @@ additional connections disabled=false,
 \end{figure}
 \end{frame}
 
-\begin{frame}[c]{Horme - Processing Chunks from Network Storage}
+\begin{frame}[c]{Horme - Processing from Network Storage}
 \begin{itemize}
   \item With NLineInputFormat, a single input split consists of N consecutive lines
   \item \texttt{BloomHashIndexFile}'s \texttt{Reader} is used to read the value corresponding to each key in input split at mapper
@@ -296,7 +297,7 @@ additional connections disabled=false,
 \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{}
+\begin{frame}[c]{Horme - Processing from HDFS}
   
 \end{frame}
 \end{document}
