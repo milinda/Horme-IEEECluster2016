@@ -51,6 +51,9 @@
       node[opacity=1,rotate=45,right=.2\unit] {#3} (\xstop,.1\unit);%
   \fi}%
 
+\newcommand{\specialcell}[2][l]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %        BEAMER OPTIONS
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -218,10 +221,61 @@ additional connections disabled=false,
 \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Horme}
+\begin{frame}[c]{Horme - BloomHashIndexFile}
 \begin{figure}[t]
   \includegraphics[scale=0.6]{horme-2}
   \centering
 \end{figure}  
+\end{frame}
+
+\begin{frame}[c]{Horme - Programming Abstraction}
+  \begin{itemize}
+    \item Reader
+    \begin{center}
+      \begin{tabular}{| l | l |}
+       \hline
+       \textbf{Scan} & \texttt{for(Record r : BloomHashIndexFile)} \\ 
+       \hline
+       \textbf{Random Access} & \texttt{Record get(Key key)} \\  
+       \hline
+       \textbf{Membership Test} & \texttt{boolean probablyHasKey(Key key)} \\    
+       \hline
+       \textbf{Accessors} & \specialcell{\texttt{HashIndex getHashIndex()} \\ 
+\texttt{BloomFilter getBloomFilter()}} \\    
+       \hline
+      \end{tabular}
+    \end{center}
+    \item Writer
+    \begin{center}
+      \begin{tabular}{| l | l |}
+       \hline
+       \textbf{Write} & \texttt{void append(Key key, Value val)} \\ 
+       \hline
+       \textbf{Misc.} & \texttt{int getLength()} \\  
+       \hline
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Horme - Distributed Packing Utility}
+  \begin{itemize}
+    \item Pack Key/Value style raw data to binary chunks
+    \item Embarrasingly parallel packing process
+    \item For the sake of load balancing each chunk should carray roughly the same payload
+    \begin{itemize}
+      \item Same # of records (e.g., simulation analysis task)
+      \item Same chunk file size (e.g., text mining task)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Horme - Parallel Processing Layer}
+  \begin{itemize}
+    \item Hadoop input and output format extension on top of BloomHashIndexFile
+    \item Retains MapReduce Key/Value semantics 
+    \item Support both scan and random access 
+    \item Binary chunks can be served from a network file system or a HDFS cluster coupled with Hadoop deployment
+  \end{itemize}
 \end{frame}
 \end{document}
