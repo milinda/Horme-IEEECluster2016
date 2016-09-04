@@ -118,6 +118,7 @@ Enable researchers world-wide to accomplish tera-scale text data-mining and anal
 \end{frame}
 
 \begin{frame}[c]{HTRC Analytics Workflow}
+\begin{figure}[ht!]
 \smartdiagramset{back arrow disabled=true,
 additions={
 additional item offset=1em,
@@ -130,10 +131,11 @@ additional connections disabled=false,
    additional arrow tip=stealth,
    additional arrow line width=1pt
    }}
-\smartdiagramadd[flow diagram:horizontal]{Search Solr,
-  Create Workset, Get Volumes, Analyse}{above of module2/{Workset is given as an input to analytic sub-systems that downloads volumes from storage sub-systems integrated to them},
-  below of module1/{Select a subset of data for analysis},
-  below of module3/{Random access to the corpus}}
+\smartdiagramadd[flow diagram:horizontal]{Selection,
+  Retrieval, Analysis}{above of module2/{Data staging from Lustre/Data API},
+  below of module1/{Select a subset of data for analysis (e.g. From 14 million volumes to 1 million)},
+  below of module3/{MapReduce, Meandre, Custom Tools}}
+\end{figure}
 \end{frame}
 
 \begin{frame}[c]{HTRC Analytics Infrastructure}
@@ -160,17 +162,14 @@ additional connections disabled=false,
 \draw[<->] (-5.2,4.1) -- (-5.2,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{2}};
 \draw[<->] (-1.35,4.1) -- (-1.35,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{3}};
 \draw[<->] (2.5,4.1) -- (2.5,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\small \textbf{4}};
-\begin{scope}[shift={($(scope1.north)+(0.5cm,-5.6cm)$)}]
+\begin{scope}[shift={($(scope1.north)+(0.2cm,-5.6cm)$)}]
   \tikzstyle{var} = [draw,shape=rectangle,minimum size=1em,rounded corners=1mm]
   \tikzstyle{operator} = [draw=none,fill=none,above,pos=0]
   \tikzset{every node/.style={var}}
   \Tree [.\tiny pairtree-root 
-            [\edge node[operator] {};
-            [
-              [.\node[] {}; ] [.\node[] {}; ]
-             ] [ [.\node[] {}; ][.\node[] {}; ]] [ [.\node[] {}; ][.\node[dotted] {}; ][.\node[] {}; ] ]
-          ]
-          [ [[.\node[] {}; ] [.\node[dotted] {}; ] [.\node[dotted] {}; ] [.\node[] {}; ]] 
+          [.\tiny max [[.\node[] {}; ] [.\node[dotted] {}; ]  [.\node[dotted] {}; ] [.\node[] {}; ]]]
+          [.\tiny mux [[.\node[] {}; ][.\node[dotted] {}; ] [.\node[dotted] {}; ][.\node[] {}; ]]]
+          [.\tiny min [[.\node[] {}; ] [.\node[dotted] {}; ] [.\node[] {}; ]] 
           ]
         ]
 \end{scope}
@@ -181,10 +180,24 @@ additional connections disabled=false,
 \section{Motivation}
 
 \begin{frame}[c]{Hadoop on HPC and HTC Environments}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
 \begin{figure}[t]
-  \includegraphics[scale=0.7]{hadoop-on-hpc-2}
+  \includegraphics[scale=0.5]{hadoop-on-hpc}
   \centering
 \end{figure}
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+\begin{enumerate}
+  \item Setup Hadoop cluster
+  \item Stage input data
+  \item Execute analysis algorithm
+  \item Stage output data
+\end{enumerate}
+\end{column}%
+\end{columns}
+
 \end{frame}
 
 \begin{frame}[c]{Hadoop on HPC and HTC Environments}
@@ -212,13 +225,13 @@ additional connections disabled=false,
 
 \begin{frame}[c]{Horme}
 \begin{itemize}
-  \item Indexed binary file format for packing key/value pairs where size of the value range from couple of kilobytes to couple of mega bytes
+  \item Indexed binary file format for packing key/value pairs where size of the value range from couple of kilobytes to couple of megabytes
   \item A Set of tools for packing and managing key/value pairs  
   \item Library for reading and writing indexed binary files 
-  \item Storage extensions for popular Big Bidata processing frameworks to read and write Hrome binary files
+  \item Storage extensions for popular Big Data processing frameworks to read and write Horme binary files
   \item Not tied to any processing framework
   \item Works on top of any file system
-  \item Delegates replication, file striping and fault-tolerance to underline file system
+  \item Delegates replication, file striping and fault-tolerance to underlying file system
 \end{itemize}
 \end{frame}
 
@@ -262,8 +275,8 @@ additional connections disabled=false,
 \begin{frame}[c]{Horme - Distributed Packing Utility}
   \begin{itemize}
     \item Pack Key/Value style raw data to binary chunks
-    \item Embarrasingly parallel packing process
-    \item For the sake of load balancing each chunk should carray roughly the same payload
+    \item Embarrassingly parallel packing process
+    \item For the sake of load balancing each chunk should carry roughly the same payload
     \begin{itemize}
       \item Same \# of records (e.g., simulation analysis task)
       \item Same chunk file size (e.g., text mining task)
