@@ -1,0 +1,516 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%DocumentNeededResources: font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Helvetica-Oblique
+%%+ font Helvetica-BoldOblique
+%%+ font Symbol
+%%Title: R Graphics Output
+%%Creator: R Software
+%%Pages: (atend)
+%%BoundingBox: 57 147 555 645
+%%EndComments
+%%BeginProlog
+/bp  { gs gs } def
+% begin .ps.prolog
+/gs  { gsave } bind def
+/gr  { grestore } bind def
+/ep  { showpage gr gr } bind def
+/m   { moveto } bind def
+/l  { rlineto } bind def
+/np  { newpath } bind def
+/cp  { closepath } bind def
+/f   { fill } bind def
+/o   { stroke } bind def
+/c   { newpath 0 360 arc } bind def
+/r   { 4 2 roll moveto 1 copy 3 -1 roll exch 0 exch rlineto 0 rlineto -1 mul 0 exch rlineto closepath } bind def
+/p1  { stroke } bind def
+/p2  { gsave bg fill grestore newpath } bind def
+/p3  { gsave bg fill grestore stroke } bind def
+/p6  { gsave bg eofill grestore newpath } bind def
+/p7  { gsave bg eofill grestore stroke } bind def
+/t   { 5 -2 roll moveto gsave rotate
+       1 index stringwidth pop
+       mul neg 0 rmoveto show grestore } bind def
+/ta  { 4 -2 roll moveto gsave rotate show } bind def
+/tb  { 2 -1 roll 0 rmoveto show } bind def
+/cl  { grestore gsave newpath 3 index 3 index moveto 1 index
+       4 -1 roll lineto  exch 1 index lineto lineto
+       closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
+%%IncludeResource: font Helvetica
+/Helvetica findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font1 exch definefont pop
+%%IncludeResource: font Helvetica-Bold
+/Helvetica-Bold findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font2 exch definefont pop
+%%IncludeResource: font Helvetica-Oblique
+/Helvetica-Oblique findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font3 exch definefont pop
+%%IncludeResource: font Helvetica-BoldOblique
+/Helvetica-BoldOblique findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font4 exch definefont pop
+%%IncludeResource: font Symbol
+/Symbol findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  currentdict
+  end
+/Font5 exch definefont pop
+%%EndProlog
+%%Page: 1 1
+bp
+56.63 147.00 555.38 645.00 cl
+1 0 0 rgb
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+130.83 220.44 m
+111.51 0 l
+o
+np
+130.83 256.44 m
+111.51 0 l
+o
+np
+130.83 292.44 m
+111.51 0 l
+o
+np
+130.83 328.44 m
+111.51 0 l
+o
+np
+130.83 364.44 m
+111.51 0 l
+o
+np
+130.83 400.44 m
+111.51 0 l
+o
+np
+130.83 436.44 m
+111.51 0 l
+o
+np
+130.83 472.44 m
+111.51 0 l
+o
+np
+130.83 508.44 m
+111.51 0 l
+o
+0 1 0 rgb
+np
+288.53 220.44 m
+0 314.35 l
+o
+np
+324.53 220.44 m
+0 314.35 l
+o
+np
+360.53 220.44 m
+0 314.35 l
+o
+0 0 1 rgb
+np
+398.46 459.46 m
+16.84 16.84 l
+o
+np
+398.46 408.55 m
+67.76 67.75 l
+o
+np
+398.46 357.63 m
+111.51 111.52 l
+o
+np
+398.46 306.72 m
+111.51 111.51 l
+o
+np
+398.46 255.81 m
+111.51 111.51 l
+o
+np
+414.00 220.44 m
+95.97 95.97 l
+o
+np
+464.91 220.44 m
+45.06 45.06 l
+o
+1 0 0 rgb
+np
+130.83 220.44 m
+111.51 0 l
+0 299.73 l
+-111.51 0 l
+0 -299.73 l
+o
+0 1 0 rgb
+np
+264.64 220.44 m
+111.52 0 l
+0 314.35 l
+-111.52 0 l
+0 -314.35 l
+o
+0 0 1 rgb
+np
+398.46 220.44 m
+111.51 0 l
+0 255.86 l
+-111.51 0 l
+0 -255.86 l
+o
+56.63 147.00 555.38 645.00 cl
+/Font1 findfont 14 s
+0 setgray
+186.59 204.60 (SeqFile HDFS) .5 0 t
+186.59 187.32 (\(Hadoop\)) .5 0 t
+320.40 204.60 (BloomHash HDFS) .5 0 t
+294.74 187.32 (\(Hor) 0 ta
+0.350 (me\)) tb gr
+454.21 204.60 (BloomHash PFS) .5 0 t
+428.55 187.32 (\(Hor) 0 ta
+0.350 (me\)) tb gr
+1.88 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+108.47 220.44 m
+0 341.15 l
+o
+np
+108.47 220.44 m
+-7.20 0 l
+o
+np
+108.47 269.18 m
+-7.20 0 l
+o
+np
+108.47 317.91 m
+-7.20 0 l
+o
+np
+108.47 366.65 m
+-7.20 0 l
+o
+np
+108.47 415.38 m
+-7.20 0 l
+o
+np
+108.47 464.12 m
+-7.20 0 l
+o
+np
+108.47 512.86 m
+-7.20 0 l
+o
+np
+108.47 561.59 m
+-7.20 0 l
+o
+/Font1 findfont 18 s
+91.19 220.44 (0) .5 90 t
+91.19 269.18 (2) .5 90 t
+91.19 317.91 (4) .5 90 t
+91.19 366.65 (6) .5 90 t
+91.19 415.38 (8) .5 90 t
+91.19 464.12 (10) .5 90 t
+91.19 512.86 (12) .5 90 t
+91.19 561.59 (14) .5 90 t
+69.59 331.18 (Ex) 90 ta
+-0.540 (ecution time \(s\)) tb gr
+56.63 147.00 555.38 645.00 cl
+1 0 0 rgb
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+130.83 220.44 m
+111.51 0 l
+o
+np
+130.83 256.44 m
+111.51 0 l
+o
+np
+130.83 292.44 m
+111.51 0 l
+o
+np
+130.83 328.44 m
+111.51 0 l
+o
+np
+130.83 364.44 m
+111.51 0 l
+o
+np
+130.83 400.44 m
+111.51 0 l
+o
+np
+130.83 436.44 m
+111.51 0 l
+o
+np
+130.83 472.44 m
+111.51 0 l
+o
+np
+130.83 508.44 m
+111.51 0 l
+o
+0 1 0 rgb
+np
+264.64 220.44 m
+111.52 0 l
+o
+np
+264.64 256.44 m
+111.52 0 l
+o
+np
+264.64 292.44 m
+111.52 0 l
+o
+np
+264.64 328.44 m
+111.52 0 l
+o
+np
+264.64 364.44 m
+111.52 0 l
+o
+np
+264.64 400.44 m
+111.52 0 l
+o
+np
+264.64 436.44 m
+111.52 0 l
+o
+np
+264.64 472.44 m
+111.52 0 l
+o
+np
+264.64 508.44 m
+111.52 0 l
+o
+0 0 1 rgb
+np
+414.00 220.44 m
+-15.54 15.54 l
+o
+np
+464.91 220.44 m
+-66.45 66.45 l
+o
+np
+509.97 226.29 m
+-111.51 111.51 l
+o
+np
+509.97 277.20 m
+-111.51 111.52 l
+o
+np
+509.97 328.12 m
+-111.51 111.51 l
+o
+np
+509.97 379.03 m
+-97.28 97.27 l
+o
+np
+509.97 429.94 m
+-46.37 46.36 l
+o
+1 0 0 rgb
+np
+130.83 220.44 m
+111.51 0 l
+0 299.73 l
+-111.51 0 l
+0 -299.73 l
+o
+0 1 0 rgb
+np
+264.64 220.44 m
+111.52 0 l
+0 314.35 l
+-111.52 0 l
+0 -314.35 l
+o
+0 0 1 rgb
+np
+398.46 220.44 m
+111.51 0 l
+0 255.86 l
+-111.51 0 l
+0 -255.86 l
+o
+56.63 147.00 555.38 645.00 cl
+/Font1 findfont 14 s
+0 setgray
+186.59 204.60 (SeqFile HDFS) .5 0 t
+186.59 187.32 (\(Hadoop\)) .5 0 t
+320.40 204.60 (BloomHash HDFS) .5 0 t
+294.74 187.32 (\(Hor) 0 ta
+0.350 (me\)) tb gr
+454.21 204.60 (BloomHash PFS) .5 0 t
+428.55 187.32 (\(Hor) 0 ta
+0.350 (me\)) tb gr
+1.88 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+108.47 220.44 m
+0 341.15 l
+o
+np
+108.47 220.44 m
+-7.20 0 l
+o
+np
+108.47 269.18 m
+-7.20 0 l
+o
+np
+108.47 317.91 m
+-7.20 0 l
+o
+np
+108.47 366.65 m
+-7.20 0 l
+o
+np
+108.47 415.38 m
+-7.20 0 l
+o
+np
+108.47 464.12 m
+-7.20 0 l
+o
+np
+108.47 512.86 m
+-7.20 0 l
+o
+np
+108.47 561.59 m
+-7.20 0 l
+o
+/Font1 findfont 18 s
+91.19 220.44 (0) .5 90 t
+91.19 269.18 (2) .5 90 t
+91.19 317.91 (4) .5 90 t
+91.19 366.65 (6) .5 90 t
+91.19 415.38 (8) .5 90 t
+91.19 464.12 (10) .5 90 t
+91.19 512.86 (12) .5 90 t
+91.19 561.59 (14) .5 90 t
+69.59 331.18 (Ex) 90 ta
+-0.540 (ecution time \(s\)) tb gr
+115.67 220.44 525.14 585.96 cl
+0 setgray
+2.25 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+186.59 517.24 m
+0 5.85 l
+o
+np
+320.40 532.84 m
+0 3.90 l
+o
+np
+454.21 442.19 m
+0 68.23 l
+o
+np
+186.59 517.24 m
+0 5.85 l
+o
+np
+182.99 517.24 m
+3.60 0 l
+3.60 0 l
+o
+np
+190.19 523.09 m
+-3.60 0 l
+-3.60 0 l
+o
+np
+320.40 532.84 m
+0 3.90 l
+o
+np
+316.80 532.84 m
+3.60 0 l
+3.60 0 l
+o
+np
+324.00 536.74 m
+-3.60 0 l
+-3.60 0 l
+o
+np
+454.21 442.19 m
+0 68.23 l
+o
+np
+450.61 442.19 m
+3.60 0 l
+3.60 0 l
+o
+np
+457.81 510.42 m
+-3.60 0 l
+-3.60 0 l
+o
+ep
+%%Trailer
+%%Pages: 1
+%%EOF

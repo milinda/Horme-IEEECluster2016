@@ -35,6 +35,10 @@
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
 
+\definecolor{computegreen}{RGB}{185, 224, 165}
+\definecolor{datared}{RGB}{255, 204, 204}
+\definecolor{dcpurple}{RGB}{229, 204, 255}
+
 
 \usepackage{chronology}
 
@@ -70,7 +74,7 @@
 \subtitle{Random Access Big Data Analytics}
 %\date{\small{\jobname}}
 %\date{\today}
-\author{Guangchen Ruan, Beth Plale; \emph{Milinda Pathirage (Presenter)}}
+\author{Guangchen Ruan, Beth Plale}
 \institute{School of Informatics and Computing, Indiana University}
 
 \hypersetup{
@@ -117,6 +121,8 @@ Enable researchers world-wide to accomplish tera-scale text data-mining and anal
 \end{exampleblock}
 \end{frame}
 
+\section{Motivation}
+
 \begin{frame}[c]{HTRC Analytics Workflow}
 \begin{figure}[ht!]
 \smartdiagramset{back arrow disabled=true,
@@ -151,33 +157,46 @@ additional connections disabled=false,
     edge from parent/.style={draw,rounded corners=1mm}
 ]
 \begin{scope}[local bounding box=scope1]
-  \draw[rounded corners=5pt] (-6.7,4.8) rectangle (-3.7,4.2) node[pos=.5] {\tiny Prepackaged Algorithms};
-  \draw[rounded corners=5pt] (-2.85,4.8) rectangle (0.15,4.2) node[pos=0.5] {\tiny Data Capsules};
-  \draw[rounded corners=5pt,fill=blue!40,double] (1,4.8) rectangle (4,4.2) node[pos=0.5] {\tiny Big Data Analytics};
-  \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-5.7,3.6) rectangle (4,3) ;
-  \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-6.2,3.3) rectangle (3.5,2.7) ;
-  \draw[fill={rgb:orange,1;yellow,2;pink,5},rounded corners=5pt] (-6.7,3) rectangle (3,2.4) node[pos=.5] {\tiny Corpus Abstractions (KV, REST, \textbf{Horme})};
+  \draw[rounded corners=1mm] (-6.7,4.8) rectangle (-3.7,4.2) node[pos=.5] {\tiny Prepackaged Algorithms};
+  \draw[rounded corners=1mm] (-2.85,4.8) rectangle (0.15,4.2) node[pos=0.5] {\tiny Data Capsules};
+  \draw[rounded corners=1mm,fill=computegreen,double] (1,4.8) rectangle (4,4.2) node[pos=0.5] {\tiny \textbf{Big Data Analytics}};
+  \draw[fill=datared,rounded corners=1mm] (-5.7,3.6) rectangle (4,3) ;
+  \draw[fill=datared,rounded corners=1mm] (-6.2,3.3) rectangle (3.5,2.7) ;
+  \draw[fill=datared,rounded corners=1mm] (-6.7,3) rectangle (3,2.4) node[pos=.5] {\tiny Corpus Abstractions (KV, REST, \textbf{Horme})};
 \end{scope}
-\draw[<->] (-1.35,2.3) -- (-1.35,1.9) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{1}};
-\draw[<->] (-5.2,4.1) -- (-5.2,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{2}};
-\draw[<->] (-1.35,4.1) -- (-1.35,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{3}};
-\draw[<->] (2.5,4.1) -- (2.5,3.7) node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\small \textbf{4}};
+\draw[<->] (-1.35,2.3) -- (-1.35,1.9); %node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{1}};
+\draw[<->] (-5.2,4.1) -- (-5.2,3.7); %node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{2}};
+\draw[<->] (-1.35,4.1) -- (-1.35,3.7); %node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\footnotesize \textbf{3}};
+\draw[<->] (2.5,4.1) -- (2.5,3.7); %node[draw=orange,anchor=west,pos=0.5,circle,fill=red!20,inner sep=0pt,minimum size=10pt,xshift=2pt]{\small \textbf{4}};
 \begin{scope}[shift={($(scope1.north)+(0.2cm,-5.6cm)$)}]
-  \tikzstyle{var} = [draw,shape=rectangle,minimum size=1em,rounded corners=1mm]
+  \tikzstyle{var} = [draw,shape=rectangle,minimum size=1em,rounded corners=0.6mm]
   \tikzstyle{operator} = [draw=none,fill=none,above,pos=0]
   \tikzset{every node/.style={var}}
   \Tree [.\tiny pairtree-root 
-          [.\tiny max [[.\node[] {}; ] [.\node[dotted] {}; ]  [.\node[dotted] {}; ] [.\node[] {}; ]]]
-          [.\tiny mux [[.\node[] {}; ][.\node[dotted] {}; ] [.\node[dotted] {}; ][.\node[] {}; ]]]
-          [.\tiny min [[.\node[] {}; ] [.\node[dotted] {}; ] [.\node[] {}; ]] 
+          [.\tiny yale [[.\node[] {}; ] [.\node[dotted] {}; ]  [.\node[dotted] {}; ] [.\node[] {}; ]]]
+          [.\tiny iu [[.\node[] {}; ][.\node[dotted] {}; ] [.\node[dotted] {}; ][.\node[] {}; ]]]
+          [.\tiny duke [[.\node[] {}; ] [.\node[dotted] {}; ] [.\node[] {}; ]] 
           ]
         ]
 \end{scope}
-\draw[rounded corners=5pt,dotted,gray] (-6.8,2) rectangle (4.1,-1.2) node[draw=none,fill=none,pos=1,xshift=-1.2cm,black] {\tiny IU Data Capacitor II};
+\draw[rounded corners=1mm,draw,gray] (-6.8,2) rectangle (4.1,-1.2) node[fill=dcpurple,draw,pos=1,xshift=-1.2cm,rounded corners=1mm] {\tiny \textcolor{black}{IU Data Capacitor II}};
 \end{tikzpicture}
 \end{frame}
 
-\section{Motivation}
+\begin{frame}[c]{Text Data Mining At HTRC}
+  \begin{itemize}
+    \item General pattern: 
+    \begin{itemize}
+      \item Reduce 14 million volumes to 1 million volumes
+      \item Volumes are randomly distributed because volumes are organized based on the creator
+      \item Access is by topics
+    \end{itemize}
+    \item HDFS performs poorly in random access use cases
+    \item HBase is good for random access, but needs to deploy external to HPC or HTC compute nodes due to transient nature of batch jobs
+    \item HBase over Lustre is not optimal
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}[c]{Hadoop on HPC and HTC Environments}
 \begin{columns}[T] % align columns
@@ -189,6 +208,7 @@ additional connections disabled=false,
 \end{column}%
 \hfill%
 \begin{column}{.48\textwidth}
+General workflow:
 \begin{enumerate}
   \item Setup Hadoop cluster
   \item Stage input data
@@ -202,22 +222,11 @@ additional connections disabled=false,
 
 \begin{frame}[c]{Hadoop on HPC and HTC Environments}
   \begin{itemize}
-    \item Data is stored in a \emph{parallel file system (PFS)} such as Lustre connected to compute nodes via network
+    \item Data is stored in a \emph{parallel file system} such as Lustre connected to compute nodes via network
     \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from Lustre before the actual computation
     \item Results get copied back to Lustre after job completion
     \item \textbf{High data staging overhead}
     \item HDFS on HPC and HTC environments is limited by scratch space capacity of compute nodes
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[c]{Text Data Mining on HPC and HTC Environments}
-  \begin{itemize}
-    \item Use Solr search or some other means to narrow down the set of digitized texts to analyse
-    \item Apply text mining techniques such as topic modeling on the selected subset
-    \item Often this subset is randomly distributed across the corpus (Around 14 million volumes in HTRC)
-    \item HDFS performs poorly in random access use cases
-    \item HBase is good for random access, but needs to deploy external to HPC or HTC compute nodes due to transient nature of batch jobs
-    \item HBase over Lustre is not optimal
   \end{itemize}
 \end{frame}
 
@@ -293,7 +302,7 @@ additional connections disabled=false,
   \end{itemize}
 \end{frame}
 
-\begin{frame}[c]{Horme - Processing Chunks from Network Storage}
+\begin{frame}[c]{Horme - Processing from Network Storage}
 \begin{figure}[t]
   \includegraphics[scale=0.4]{horme-with-pfs}
   \centering
@@ -306,11 +315,82 @@ additional connections disabled=false,
   \item \texttt{BloomHashIndexFile}'s \texttt{Reader} is used to read the value corresponding to each key in input split at mapper
   \item Input should be sorted by binary chunk's path so that the \texttt{RecordReader} only needs to opens a new file when the next line is a new chunk
   \item Workload is balanced with respect to number of records processed
-  \item Workload is approximately balances with respect to the size of the records 
+  \item Workload is approximately balanced with respect to the size of the records 
 \end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Horme - Processing from HDFS}
-  
+  Horme's Hadoop extensions take care of figuring out input splits and converting input splits to key/value pairs for consumption by mappers.
+  \begin{figure}[t]
+  \includegraphics[scale=0.3]{horme-hdfs}
+  \centering
+\end{figure}
+\end{frame}
+
+\section{Evaluation}
+
+\begin{frame}[c]{Environment}
+\begin{itemize}
+  \item For the single node setting, we conducted the experiment on a 4-core 2.4 GHz Intel W3503 Xeon CPU, 8 GB of memory, and 7200 RPM SATA drive. Each record has fixed sized key (100 byte) and value (2 MB).
+  \item Hadoop v2.6.1
+  \item HDFS uses 128 MB blocks with default replication factor of 3
+  \item Karst compute nodes containing two Intel Xeon E5-2650 v2 8-core processors and 32 GB of RAM, and a local disk of 180 GB at 7200 rpm
+  \item IU Datacapacitor II (Lustre) as parallel file system
+\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Overhead of BloomHashIndexFile}
+\vspace{-1.5cm}
+\begin{columns}[T] % align columns
+    \begin{column}{.48\textwidth}
+    \begin{figure}[ht!]
+      \includegraphics[scale=0.3]{exp-bloomhash-rw-overhead}
+      \centering
+    \end{figure}
+    \end{column}%
+    \hfill%
+    \begin{column}{.48\textwidth}
+    \begin{figure}[ht!]
+      \includegraphics[scale=0.3]{exp-bloomhash-space-overhead}
+      \centering
+    \end{figure} 
+    \end{column}%
+\end{columns}  
+\end{frame}
+
+\begin{frame}[c]{Horme vs Vanilla Hadoop}
+\vspace{-1.5cm}
+\begin{columns}[T] % align columns
+    \begin{column}{.48\textwidth}
+    \begin{figure}[ht!]
+      \includegraphics[scale=0.3]{eval-scan}
+      \centering
+      \caption{Scan/sequential Access}
+    \end{figure}
+    \end{column}%
+    \hfill%
+    \begin{column}{.48\textwidth}
+    \begin{figure}[ht!]
+      \includegraphics[scale=0.3]{eval-random}
+      \centering
+      \caption{Query/Random Access}
+    \end{figure} 
+    \end{column}%
+\end{columns}  
+\end{frame}
+
+\begin{frame}[c]{Horme vs Vanilla Hadoop}
+\begin{figure}[ht!]
+      \includegraphics[scale=0.3]{eval-write}
+      \centering
+      \caption{Write}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}[c]{Observations}
+  \begin{itemize}
+    \item Horme’s “Random read from PFS” outperforms Hadoop’s “Random read from HBase” by 41.1%, 32.7%, and 37.3% for 20%, 40% and 60% query setting, respectively. 
+    \item It is also superior to “Random read from HDFS” by 10.8%, 10.2% and 15.6% respectively in the three settings.
+  \end{itemize}
 \end{frame}
 \end{document}
