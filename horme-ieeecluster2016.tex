@@ -4,8 +4,8 @@
 % Website   :: http://milinda.pathirage.org
 % Template  :: sthlm beamer theme by Benjamin Weiss (hendryolson@gmail.com, http://v42.com), 
 %              which is HEAVILY based on the HSRM beamer theme created by Benjamin Weiss
-%			   (benjamin.weiss@student.hs-rm.de), which can be found on GitHub
-%			   <https://github.com/hsrmbeamertheme/hsrmbeamertheme>.
+%        (benjamin.weiss@student.hs-rm.de), which can be found on GitHub
+%        <https://github.com/hsrmbeamertheme/hsrmbeamertheme>.
 
 
 
@@ -66,7 +66,7 @@
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %
-%	PRESENTATION INFORMATION
+% PRESENTATION INFORMATION
 %
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -74,7 +74,7 @@
 \subtitle{Random Access Big Data Analytics}
 %\date{\small{\jobname}}
 %\date{\today}
-\author{Guangchen Ruan, Beth Plale}
+\author{Guangchen Ruan, Beth Plale, Milinda Paithrage}
 \institute{School of Informatics and Computing, Indiana University}
 
 \hypersetup{
@@ -90,35 +90,49 @@ pdfcreator = {}
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %
-%	TITLE PAGE
+% TITLE PAGE
 %
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 \maketitle
 
 %\begin{frame}[plain]
-%	\titlepage
+% \titlepage
 %\end{frame}
 
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 %
-%	TABLE OF CONTENTS: OVERVIEW
+% TABLE OF CONTENTS: OVERVIEW
 %
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-\section{Introduction}
 
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-%	FRAME:
-%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-\begin{frame}[c]{Hathitrust Research Center (HTRC)}
-Research arm of \textbf{Hathitrust Digital Library} that develops and maintain infrastructure for enabling computational access to \textbf{14 million} digitized volumes.
-
+\begin{frame}[c]{Thanks to}
+ \textbf{HathiTrust analytics team at Indiana Uninversity}: \\
+ Beth Plale \\
+ Yu (Marie) Ma \\
+ Milinda Paithrage \\
+ Guangchen Ruan \\
+ Zong Peng \\
+ Samitha Liyanage
+ 
+ 
 \vspace{1em}
 
-\begin{exampleblock}{Mission}
-Enable researchers world-wide to accomplish tera-scale text data-mining and analysis  
-\end{exampleblock}
+Resource thanks for this work:  Alfred P. Sloan Foundation, HathiTrust consortium, and NSF funded Extreme Science and Engineering Discovery Environment (XSEDE) project
+\end{frame}
+
+\section{Introduction}
+
+
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% FRAME:
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+\begin{frame}[c]{Motivation}
+\textbf{HathiTrust}:  consortium providing stewardship of over \textbf{14 million} digitized books from research libraries in the US and beyond, 60\% of which are in copyright.  
+
+\vspace{1em}
+\textbf{HathiTrust Research Center (HTRC)} enables secure analytical access to the corpus.  
 \end{frame}
 
 \section{Motivation}
@@ -139,8 +153,8 @@ additional connections disabled=false,
    }}
 \smartdiagramadd[flow diagram:horizontal]{Selection,
   Retrieval, Analysis}{above of module2/{Data staging from Lustre/Data API},
-  below of module1/{Select a subset of data for analysis (e.g. From 14 million volumes to 1 million)},
-  below of module3/{MapReduce, Meandre, Custom Tools}}
+  below of module1/{Select subset of texts for analysis (e.g. from 14 million texts to 1 million)},
+  below of module3/{MapReduce, Weka, LDA Topic Modeling}}
 \end{figure}
 \end{frame}
 
@@ -187,12 +201,11 @@ additional connections disabled=false,
   \begin{itemize}
     \item General pattern: 
     \begin{itemize}
-      \item Reduce 14 million volumes to 1 million volumes
-      \item Volumes are randomly distributed because volumes are organized based on the creator
-      \item Access is by topics
+      \item Reduce 14 million texts to 1 million to analyze
+      \item Text storage is organized according to library  that owns digitzed book where access is  by genre, subject, etc.
     \end{itemize}
     \item HDFS performs poorly in random access use cases
-    \item HBase is good for random access, but needs to deploy external to HPC or HTC compute nodes due to transient nature of batch jobs
+    \item HBase good for random access, but needs to deploy external to HPC or HTC compute nodes due to transient nature of batch jobs
     \item HBase over Lustre is not optimal
   \end{itemize}
 \end{frame}
@@ -211,9 +224,9 @@ additional connections disabled=false,
 General workflow:
 \begin{enumerate}
   \item Setup Hadoop cluster
-  \item Stage input data
+  \item Partition and stage in blocks of digitized texts
   \item Execute analysis algorithm
-  \item Stage output data
+  \item Stage out analytical results
 \end{enumerate}
 \end{column}%
 \end{columns}
@@ -222,11 +235,11 @@ General workflow:
 
 \begin{frame}[c]{Hadoop on HPC and HTC Environments}
   \begin{itemize}
-    \item Data is stored in a \emph{parallel file system} such as Lustre connected to compute nodes via network
-    \item Often data get staged to the scratch space in compute nodes (e.g. HDFS data nodes) from Lustre before the actual computation
+    \item Data is stored in \emph{parallel file system, e.g., Lustre} connected to compute nodes via network
+    \item Often data gets staged to scratch space in compute nodes (e.g. HDFS data nodes) from Lustre before actual computation
     \item Results get copied back to Lustre after job completion
     \item \textbf{High data staging overhead}
-    \item HDFS on HPC and HTC environments is limited by scratch space capacity of compute nodes
+    \item HDFS on HPC and HTC environments limited by scratch space capacity of compute nodes
   \end{itemize}
 \end{frame}
 
@@ -234,8 +247,8 @@ General workflow:
 
 \begin{frame}[c]{Horme}
 \begin{itemize}
-  \item Indexed binary file format for packing key/value pairs where size of the value range from couple of kilobytes to couple of megabytes
-  \item A Set of tools for packing and managing key/value pairs  
+  \item Indexed binary file format for packing key/value pairs where size of value range from couple of kilobytes to couple of megabytes
+  \item Set of tools for packing and managing key/value pairs  
   \item Library for reading and writing indexed binary files 
   \item Storage extensions for popular Big Data processing frameworks to read and write Horme binary files
   \item Not tied to any processing framework
@@ -261,7 +274,8 @@ General workflow:
        \hline
        \textbf{Random Access} & \texttt{Record get(Key key)} \\  
        \hline
-       \textbf{Membership Test} & \texttt{boolean probablyHasKey(Key key)} \\    
+       \textbf{Membership Test} & \texttt{boolean probablyHasKey(Key key)} \\   
+       % Milinda, ``probably'' is very unscientific term.  Be ready to defend it in probability or other more precise terms.   You may want to replace ``probably'' with a more precise term  so as to avoid scrutiny.  I looked at paper and it's not evident how the method is implemented. Surprised the reviewers (or me) didn't catch earlier. 
        \hline
        \textbf{Accessors} & \specialcell{\texttt{HashIndex getHashIndex()} \\ 
 \texttt{BloomFilter getBloomFilter()}} \\    
@@ -283,9 +297,9 @@ General workflow:
 
 \begin{frame}[c]{Horme - Distributed Packing Utility}
   \begin{itemize}
-    \item Pack Key/Value style raw data to binary chunks
-    \item Embarrassingly parallel packing process
-    \item For the sake of load balancing each chunk should carry roughly the same payload
+    \item Pack key-value raw data into binary chunks
+    \item Pleasingly parallel packing process
+    \item For sake of load balancing each chunk should carry roughly same payload
     \begin{itemize}
       \item Same \# of records (e.g., simulation analysis task)
       \item Same chunk file size (e.g., text mining task)
@@ -296,9 +310,9 @@ General workflow:
 \begin{frame}[c]{Horme - Parallel Processing Layer}
   \begin{itemize}
     \item Hadoop input and output format extension on top of BloomHashIndexFile
-    \item Retains MapReduce Key/Value semantics 
-    \item Support both scan and random access 
-    \item Binary chunks can be served from a network file system or a HDFS cluster coupled with Hadoop deployment
+    \item Retains MapReduce key-value semantics 
+    \item Supports both scan and random access 
+    \item Binary chunks can be served from network file system or HDFS cluster coupled with Hadoop deployment
   \end{itemize}
 \end{frame}
 
@@ -312,30 +326,33 @@ General workflow:
 \begin{frame}[c]{Horme - Processing from Network Storage}
 \begin{itemize}
   \item With NLineInputFormat, a single input split consists of N consecutive lines
-  \item \texttt{BloomHashIndexFile}'s \texttt{Reader} is used to read the value corresponding to each key in input split at mapper
-  \item Input should be sorted by binary chunk's path so that the \texttt{RecordReader} only needs to opens a new file when the next line is a new chunk
-  \item Workload is balanced with respect to number of records processed
-  \item Workload is approximately balanced with respect to the size of the records 
+  \item \texttt{BloomHashIndexFile} \texttt{Reader} reads value corresponding to each key in input split at mapper
+  \item Input sorted by binary chunk path so that \texttt{RecordReader} need only open a new file when next line is a new chunk
+  \item Workload balanced on number of records processed
+  \item Workload approximately balanced on size of records 
 \end{itemize}
 \end{frame}
 
 \begin{frame}[c]{Horme - Processing from HDFS}
-  Horme's Hadoop extensions take care of figuring out input splits and converting input splits to key/value pairs for consumption by mappers.
+  Horme Hadoop extensions determine input splits and convert input splits to key-value pairs for consumption by mappers
   \begin{figure}[t]
   \includegraphics[scale=0.3]{horme-hdfs}
   \centering
 \end{figure}
 \end{frame}
 
-\section{Evaluation}
+\section{Experimental Evaluation}
 
-\begin{frame}[c]{Environment}
+\begin{frame}[c]{Experimental Evaluation Environment}
+
 \begin{itemize}
-  \item For the single node setting, we conducted the experiment on a 4-core 2.4 GHz Intel W3503 Xeon CPU, 8 GB of memory, and 7200 RPM SATA drive. Each record has fixed sized key (100 byte) and value (2 MB).
+  \item Single node setting: 4-core 2.4 GHz Intel W3503 Xeon CPU, 8 GB RAM, 7200 RPM SATA drive 
+    \item Distributed node setting: each node is two Intel Xeon E5-2650 v2 8-core processors, 32 GB RAM, 180 GB local disk at 7200 RPM 
+  \item Each record has fixed sized key (100 byte) and value (2 MB)
   \item Hadoop v2.6.1
-  \item HDFS uses 128 MB blocks with default replication factor of 3
-  \item Karst compute nodes containing two Intel Xeon E5-2650 v2 8-core processors and 32 GB of RAM, and a local disk of 180 GB at 7200 rpm
-  \item IU Datacapacitor II (Lustre) as parallel file system
+  \item 128 MB HDFS blocks with default replication factor of 3
+  \item Lustre parallel file system
+  \item Dataset size: 425,276 texts (digitized books)
 \end{itemize}
 \end{frame}
 
@@ -365,7 +382,7 @@ General workflow:
     \begin{figure}[ht!]
       \includegraphics[scale=0.3]{eval-scan}
       \centering
-      \caption{Scan/sequential Access}
+      \caption{Scan/Sequential Access}
     \end{figure}
     \end{column}%
     \hfill%
@@ -389,8 +406,27 @@ General workflow:
 
 \begin{frame}[c]{Observations}
   \begin{itemize}
-    \item Horme’s “Random read from PFS” outperforms Hadoop’s “Random read from HBase” by 41.1%, 32.7%, and 37.3% for 20%, 40% and 60% query setting, respectively. 
-    \item It is also superior to “Random read from HDFS” by 10.8%, 10.2% and 15.6% respectively in the three settings.
+    \item Horme’s “Random read from PFS” outperforms Hadoop’s “Random read from HBase” by 41.1\%, 32.7\%, and 37.3\% for 20\%, 40\% and 60\% query setting, respectively. 
+    \item Horme superior to “Random read from HDFS” by 10.8\%, 10.2\% and 15.6\% respectively in three settings
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[c]{Related Work}
+% Milinda, cite the 2-3 most closely related works here. You won't want to dwell on them in the talk, but will need to include this slide. 
+  \begin{itemize}
+    \item \small Fadika, Zacharia, et al. \textbf{"Mariane: Mapreduce implementation adapted for hpc environments."} 2011 IEEE/ACM 12th International Conference on Grid Computing. IEEE, 2011.
+    \item \small Sehrish, Saba, et al. \textbf{"Mrap: A novel mapreduce-based framework to support hpc analytics applications with access patterns."} Proceedings of the 19th ACM International Symposium on High Performance Distributed Computing. ACM, 2010.
+    \item \small Dong, Bo, et al. \textbf{"A novel approach to improving the efficiency of storing and accessing small files on hadoop: a case study by powerpoint files."} Services Computing (SCC), 2010 IEEE International Conference on. IEEE, 2010.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Future Work}
+
+  \begin{itemize}
+    \item Improve read performance through delayed record fetching when reading BloomHashIndexFile
+    \item Evaluation is over 500,000 texts (books); future work is to evaluate in realistic setting of HTRC 
+    \item Horme's use in HTRC is for large-scale parallel pattern matching of n-gram (multi-word) terms on a large subset of HT corpus.  Open question around packing strategy that reduces random access time for 80\% of anticipated workload
   \end{itemize}
 \end{frame}
 \end{document}
