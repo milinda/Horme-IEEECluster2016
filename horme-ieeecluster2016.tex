@@ -154,7 +154,7 @@ additional connections disabled=false,
    }}
 \smartdiagramadd[flow diagram:horizontal]{Selection,
   Retrieval, Analysis}{above of module2/{Data staging from Lustre/Data API},
-  below of module1/{Select subset of texts for analysis (e.g. from 14 million texts to 1 million)},
+  below of module1/{Select a subset of texts for analysis (e.g. from 14 million texts to 1 million)},
   below of module3/{MapReduce, Weka, LDA Topic Modeling}}
 \end{figure}
 \end{frame}
@@ -310,10 +310,10 @@ General workflow:
 
 \begin{frame}[c]{Horme - Parallel Processing Layer}
   \begin{itemize}
-    \item Hadoop input and output format extension on top of BloomHashIndexFile
+    \item Hadoop input and output format extensions on top of BloomHashIndexFile
     \item Retains MapReduce key-value semantics 
     \item Supports both scan and random access 
-    \item Binary chunks can be served from network file system or HDFS cluster coupled with Hadoop deployment
+    \item Binary chunks can be served from parallel file system or HDFS cluster coupled with Hadoop deployment
   \end{itemize}
 \end{frame}
 
@@ -348,7 +348,7 @@ General workflow:
 
 \begin{itemize}
   \item Single node setting: 4-core 2.4 GHz Intel W3503 Xeon CPU, 8 GB RAM, 7200 RPM SATA drive 
-    \item Distributed node setting: each node is two Intel Xeon E5-2650 v2 8-core processors, 32 GB RAM, 180 GB local disk at 7200 RPM 
+  \item Distributed node setting: each node is two Intel Xeon E5-2650 v2 8-core processors, 32 GB RAM, 180 GB local disk at 7200 RPM 
   \item Each record has fixed sized key (100 byte) and value (2 MB)
   \item Hadoop v2.6.1
   \item 128 MB HDFS blocks with default replication factor of 3
@@ -427,7 +427,8 @@ General workflow:
   \begin{itemize}
     \item Improve read performance through delayed record fetching when reading BloomHashIndexFile
     \item Evaluation is over 500,000 texts (books); future work is to evaluate in realistic setting of HTRC 
-    \item Horme's use in HTRC is for large-scale parallel pattern matching of n-gram (multi-word) terms on a large subset of HT corpus.  Open question around packing strategy that reduces random access time for 80\% of anticipated workload
+    \item Horme's use in HTRC is for large-scale parallel pattern matching of n-gram (multi-word) terms on a large subset of HT corpus.  
+    \item Open question around packing strategy that reduces random access time for 80\% of anticipated workload
   \end{itemize}
 \end{frame}
 \end{document}
